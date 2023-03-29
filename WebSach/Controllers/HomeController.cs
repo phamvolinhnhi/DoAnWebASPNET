@@ -1,30 +1,39 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebSach.Models;
 
 namespace WebSach.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        private readonly WebBookDb _db;
+        public HomeController()
         {
-            return View();
+            _db = new WebBookDb();
+        }
+        public ActionResult Index(int? page)
+        {
+            page = page ?? 1;
+            int pageSize = 4;
+            return View(GetAll().ToPagedList(page.Value, pageSize));
+        }
+        //public ActionResult Index()
+        //{
+        //    return View(GetAll());
+        //}
+        public List<Books> GetAll() => _db.Books.ToList();
+        public List<Books> GetAll(string searchKey)
+        {
+            return _db.Books.Where(p => p.Title.Contains(searchKey) || p.Author.Contains(searchKey)).ToList();
         }
 
-        public ActionResult About()
+        public Books FindBookById(int id)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return _db.Books.FirstOrDefault(p => p.Book_Id == id);
         }
     }
 }

@@ -258,6 +258,58 @@ body {
     position: relative;
 }
 
+.list_grid_out {
+    margin-left: 0
+}
+
+ul.list_grid li {
+    width: 180px;
+    float: left;
+    margin: 10px
+}
+
+    ul.list_grid li .book_avatar {
+        height: 220px;
+        width: 100%;
+        overflow: hidden;
+        border-radius: 6px;
+        position: relative
+    }
+
+        ul.list_grid li .book_avatar img {
+            width: 100%;
+            min-width: 100%;
+            height: auto;
+            vertical-align: middle;
+            display: inline-block;
+            border: 1px solid #ccc;
+        }
+
+    ul.list_grid li .book_info .book_name {
+        text-align: center;
+        line-height: 35px;
+        font-weight: 600;
+        font-size: 13px;
+        margin-top: 7px;
+        height: 35px;
+        max-width: 100%;
+        overflow: hidden;
+        text-transform: capitalize
+    }
+
+        ul.list_grid li .book_info .book_name h3 {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+img.center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .div_middle {
     width: 1200px;
     margin: 0 auto;
@@ -396,4 +448,54 @@ input[type="text"], input[type="email"], input[type="password"] {
 
 .clear {
     clear: both
+}
+
+.MenuTrang {
+    padding-top: 20px;
+    text-align: center;
+}
+
+    .MenuTrang li {
+        padding-top: 20px;
+        text-align: center;
+        display: inline
+    }
+
+    .MenuTrang a {
+        clear: both;
+        color: #76b852;
+        margin: 0 4px;
+        line-height: 40px;
+        width: 40px;
+        text-align: center;
+        display: inline-block;
+        border-radius: 150px;
+        cursor: pointer;
+        font-size: 16px;
+        border: 1px solid #e2e2e2;
+    }
+
+    .MenuTrang .active a {
+        background-color: #76b852;
+        color: snow;
+    }
+
+.show-read-more .more-text {
+    display: none;
+}
+
+.has-text-centered {
+    padding-top: 10px;
+    text-align: center !important;
+}
+
+.pagination {
+    padding-top: 20px;
+    text-align: center;
+}
+
+footer {
+    background-color: #fff;
+    border-top: 5px solid #76b852;
+    padding: 20px 0;
 }

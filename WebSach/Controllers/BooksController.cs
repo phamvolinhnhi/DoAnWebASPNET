@@ -24,10 +24,6 @@ namespace WebSach.Controllers
             int pageSize = 4;
             return View(GetAll(search).ToPagedList(page.Value, pageSize));
         }
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
 
         public List<Books> GetAll() => _db.Books.ToList();
         public List<Books> GetAll(string searchKey)
@@ -40,5 +36,28 @@ namespace WebSach.Controllers
         {
             return _db.Books.FirstOrDefault(p => p.Book_Id == id);
         }
+
+        public ActionResult Sach(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Books books = FindBookById(id.Value);
+            if (books == null)
+            {
+                return HttpNotFound();
+            }
+            var booksviewmodel = new BooksViewModel
+            {
+                books = FindBookById(id.Value),
+                Chapters = _db.Chapter.Where(c=>c.Book_Id == id.Value).ToList(),
+                Comments = _db.Comment.Where(c=>c.Book_Id == id.Value).ToList(),
+                
+            };
+            return View(booksviewmodel);
+        }
+
+        
     }
 }

@@ -140,6 +140,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Books.cs" />
+    <Compile Include="Models\BooksViewModel.cs" />
     <Compile Include="Models\Categories.cs" />
     <Compile Include="Models\Chapter.cs" />
     <Compile Include="Models\Comment.cs" />
@@ -166,7 +167,11 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="CSS\media.css" />
+    <Content Include="CSS\media2.css" />
     <Content Include="CSS\StyleSheet1.css" />
+    <Content Include="CSS\StyleSheet2.css" />
+    <Content Include="CSS\StyleSheet3.css" />
+    <Content Include="CSS\StyleSheet4.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -213,6 +218,8 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Books\Index.cshtml" />
+    <Content Include="Views\Books\Sach.cshtml" />
+    <Content Include="Views\Books\Chapter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -633,13 +633,29 @@ ul.list-info {
 
     .list01 li a {
         display: inline-block;
-        border: 1px solid #56ccf2;
-        color: #56ccf2;
+        border: 1px solid #76b852;
+        color: #76b852;
         float: left;
         padding: 4px 6px;
         border-radius: 3px;
         margin-right: 10px;
     }
+
+.comment-container {
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+    .comment-container .story-detail-title {
+        color: #f18121;
+        font-size: 20px;
+    }
+        .comment-container .story-detail-title i {
+            margin-right: 10px;
+        }
+
+.book_detail span i {
+    padding-right: 5px;
+}
 
 footer {
     background-color: #fff;

@@ -8,23 +8,31 @@ using WebSach.Models;
 
 namespace WebSach.Controllers
 {
-    public class HomeController : Controller
+    public class BooksController : Controller
     {
         private readonly WebBookDb _db;
-        public HomeController()
+        public BooksController()
         {
             _db = new WebBookDb();
         }
-        public ActionResult Index(int? page)
+
+        // GET: Books
+        public ActionResult Index(int? page, string search)
         {
+            ViewBag.Keyword = search;
             page = page ?? 1;
             int pageSize = 4;
-            return View(GetAll().ToPagedList(page.Value, pageSize));
+            return View(GetAll(search).ToPagedList(page.Value, pageSize));
         }
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
 
         public List<Books> GetAll() => _db.Books.ToList();
         public List<Books> GetAll(string searchKey)
         {
+            searchKey = searchKey ?? "";
             return _db.Books.Where(p => p.Title.Contains(searchKey) || p.Author.Contains(searchKey)).ToList();
         }
 

@@ -53,10 +53,12 @@
                     <div class="clear"></div>
                 </div>
                 <div class="top_search">
-                    <input class="search" id="search_input" placeholder="Bạn muốn tìm truyện gì?" />
-                    <button>
-                        <i class="fa fa-search" aria-hidden="true"></i>
-                    </button>
+                    <form method="get" action="@Url.Action("Index", "Books")">
+                        <input class="search" value="@ViewBag.Keyword" id="search_input" name="search" placeholder="Bạn muốn tìm truyện gì?" />
+                        <button type="submit">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
+                    </form>
                 </div>
                 <div class="clear"></div>
             </div>

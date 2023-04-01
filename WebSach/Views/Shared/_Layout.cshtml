@@ -7,8 +7,8 @@
     <link rel="shortcut icon" href="~/Images/shortcuticon.png" type="image/png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="chrome-extension://gobpkdmjnhpopmpddhmhmbhkiienpfdo/css/translate_popup.css" />
-    <link rel="stylesheet" href="~/CSS/StyleSheet1.css" />
-    <link rel="stylesheet" href="~/CSS/media.css" />
+    <link rel="stylesheet" href="~/CSS/StyleSheet4.css" type="text/css"/>
+    <link rel="stylesheet" href="~/CSS/media2.css" />
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
@@ -53,10 +53,12 @@
                     <div class="clear"></div>
                 </div>
                 <div class="top_search">
-                    <input class="search" id="search_input" placeholder="Bạn muốn tìm truyện gì?" />
-                    <button>
-                        <i class="fa fa-search" aria-hidden="true"></i>
-                    </button>
+                    <form method="get" action="@Url.Action("Index", "Books")">
+                        <input class="search" value="@ViewBag.Keyword" id="search_input" name="search" placeholder="Bạn muốn tìm truyện gì?" />
+                        <button type="submit">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
+                    </form>
                 </div>
                 <div class="clear"></div>
             </div>
@@ -182,7 +184,6 @@
         @RenderBody()
 
     </div>
-    <hr />
 
     <footer class="light">
         <div class="div_middle">

@@ -560,7 +560,6 @@ input[type="text"], input[type="email"], input[type="password"] {
                 float: right;
                 text-align: left;
             }
-
                 .content .main_content .book_detail .book_info .book_other h1 {
                     text-align: left;
                     font-size: 20px;
@@ -630,7 +629,6 @@ ul.list-info {
     overflow: hidden;
     padding-bottom: 10px;
 }
-
     .list01 li a {
         display: inline-block;
         border: 1px solid #56ccf2;

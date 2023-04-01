@@ -56,6 +56,12 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -128,11 +134,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Books.cs" />
+    <Compile Include="Models\BooksViewModel.cs" />
     <Compile Include="Models\Categories.cs" />
     <Compile Include="Models\Chapter.cs" />
     <Compile Include="Models\Comment.cs" />
@@ -157,11 +165,22 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="CSS\media.css" />
+    <Content Include="CSS\media2.css" />
     <Content Include="CSS\StyleSheet1.css" />
+    <Content Include="CSS\StyleSheet2.css" />
+    <Content Include="CSS\StyleSheet3.css" />
+    <Content Include="CSS\StyleSheet4.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\Books\book1.jpg" />
+    <Content Include="Images\Books\book2.jpg" />
+    <Content Include="Images\Books\book3.jpg" />
+    <Content Include="Images\Books\book4.jpg" />
+    <Content Include="Images\Books\book5.jpg" />
+    <Content Include="Images\Books\book6.jpg" />
     <Content Include="Images\Banner\R.jpg" />
     <Content Include="Images\Banner\reading-book-web-banner-design-student-reading-book-on-stack-of-book-to-get-inspiration-online-education-digital-classroom-e-learning-concept-header-or-footer-banner-free-vector.jpg" />
     <Content Include="Images\Banner\SMP-books-banner.jpg" />
@@ -198,6 +217,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Books\Index.cshtml" />
+    <Content Include="Views\Books\Sach.cshtml" />
+    <Content Include="Views\Books\Chapter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

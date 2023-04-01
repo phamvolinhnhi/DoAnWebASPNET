@@ -58,6 +58,18 @@ namespace WebSach.Controllers
             return View(booksviewmodel);
         }
 
-        
+        public ActionResult Chapter(int? bookid, int? id)
+        {
+            if (id == null || bookid == null)
+            {
+                return HttpNotFound();
+            }
+            Chapter chapter = _db.Chapter.Where(c=>c.Chapter_Id == id.Value && c.Book_Id == bookid).FirstOrDefault();
+            if (chapter == null)
+            {
+                return HttpNotFound();
+            }
+            return View(chapter);
+        }
     }
 }

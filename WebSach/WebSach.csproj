@@ -169,8 +169,6 @@
     <Content Include="CSS\media.css" />
     <Content Include="CSS\media2.css" />
     <Content Include="CSS\StyleSheet1.css" />
-    <Content Include="CSS\StyleSheet2.css" />
-    <Content Include="CSS\StyleSheet3.css" />
     <Content Include="CSS\StyleSheet4.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />

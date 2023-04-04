@@ -87,14 +87,16 @@
 </div>
 
 <div class="div_middle">
+    <h2>@ViewBag.Keyword</h2>
     <div class="list_grid_out">
         <ul class="list_grid grid" id="list_new">
             @foreach (var item in Model)
             {
                 <li>
                     <div class="book_avatar">
-                        <a href="@Url.Action("Sach", "Books", new { id = item.Book_Id})">
-                            <img class="center" src="~/Images/Books/@item.Avatar" alt="@item.Title" />
+                        <a href="@Url.Action("","Books", new { id = item.Book_Id})">
+                            <img class="center" src="@item.Avatar" alt="@item.Title" />
+
                         </a>
                         <div class="top-notice">
                             <span class="time-ago">@item.Update_at</span>

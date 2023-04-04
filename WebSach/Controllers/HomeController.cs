@@ -15,11 +15,13 @@ namespace WebSach.Controllers
         {
             _db = new WebBookDb();
         }
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page, string search)
         {
+            search = search ?? "";
+            ViewBag.Keyword = search;
             page = page ?? 1;
-            int pageSize = 4;
-            return View(GetAll().ToPagedList(page.Value, pageSize));
+            int pageSize = 24;
+            return View(GetAll(search).ToPagedList(page.Value, pageSize));
         }
 
         public List<Books> GetAll() => _db.Books.ToList();

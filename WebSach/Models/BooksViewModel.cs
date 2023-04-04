@@ -10,5 +10,8 @@ namespace WebSach.Models
         public Books books;
         public List<Chapter> chapters;
         public List<Comment> comments;
+        public List<Chapter> Chapters;
+        public List<Comment> Comments;
+
     }
 }

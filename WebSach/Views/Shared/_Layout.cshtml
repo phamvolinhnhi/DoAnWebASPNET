@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="chrome-extension://gobpkdmjnhpopmpddhmhmbhkiienpfdo/css/translate_popup.css" />
     <link rel="stylesheet" href="~/CSS/StyleSheet1.css" type="text/css" />
+
     <link rel="stylesheet" href="~/CSS/media2.css" />
     @Scripts.Render("~/bundles/modernizr")
 
@@ -54,6 +55,7 @@
                 </div>
                 <div class="top_search">
                     <form method="get" action="@Url.Action("Index", "Home")">
+
                         <input class="search" value="@ViewBag.Keyword" id="search_input" name="search" placeholder="Bạn muốn tìm truyện gì?" />
                         <button type="submit">
                             <i class="fa fa-search" aria-hidden="true"></i>

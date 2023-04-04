@@ -1,0 +1,45 @@
+﻿@model WebSach.Models.UserViewModel
+@{
+    ViewBag.Title = "Account";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="div_middle">
+    <br />
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+            <div class="account-info clearfix">
+                <h2 class="posttitle">Thông tin tài khoản </h2>
+                <div class="info-detail">
+                    <div class="group">
+                        <div class="label">Họ và tên</div>
+                        <div class="detail">@Html.DisplayFor(model => model.user.Full_Name)</div>
+                    </div>
+                    <div class="group">
+                        <div class="label">Email</div>
+                        <div class="detail">@Html.DisplayFor(model => model.user.Email)</div>
+                    </div>
+                    <div class="group">
+                        <a class="btn btn-warning" href="@Url.Action("Edit","Account", new { id = Model.user.User_Name })">Chỉnh sửa</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-6">
+            <div class="account-info clearfix">
+                <h2 class="posttitle">Avatar</h2>
+                <div class="info-detail">
+                    <img src="@Model.user.Avatar" alt="Avatar" />
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-6">
+            <div class="relative">
+                <h2 class="posttitle">Truyện theo dõi</h2>
+            </div>
+        </div>
+
+
+    </div>
+</div>

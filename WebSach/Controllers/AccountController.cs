@@ -13,10 +13,12 @@ namespace WebSach.Controllers
     public class AccountController : Controller
     {
         private WebBookDb _db = new WebBookDb();
+
         // GET: Account
         public ActionResult Index(string id)
         {
-
+            if (Session["UserName"] == null)
+                return View("Login");
             if (String.IsNullOrEmpty(id))
             {
                 return HttpNotFound();
@@ -24,12 +26,14 @@ namespace WebSach.Controllers
             User find = _db.User.FirstOrDefault(p => p.User_Name == id);
             if (find == null)
                 return HttpNotFound();
-            return View(find);
-
+            var viewModel = new UserViewModel
+            {
+                user = find
+            };
+            return View(viewModel);
         }
 
         // LOGIN
-        [AllowAnonymous]
         public ActionResult Login()
         {
             return View();
@@ -46,8 +50,6 @@ namespace WebSach.Controllers
                 if (data.Count() > 0)
                 {
                     //add session
-                    Session["Email"] = data.FirstOrDefault().Email;
-                    Session["FullName"] = data.FirstOrDefault().Full_Name;
                     Session["UserName"] = data.FirstOrDefault().User_Name;
                     data.FirstOrDefault().Last_Login = DateTime.Now;
                     return RedirectToAction("Index", "Home");
@@ -98,6 +100,7 @@ namespace WebSach.Controllers
 
         //POST: Register
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult Register(User _user, FormCollection form)
         {
@@ -115,7 +118,8 @@ namespace WebSach.Controllers
                             Email = _user.Email,
                             Password = GetMD5(_user.Password),
                             Create_at = DateTime.Now,
-                            Permission_Id = false
+                            Permission_Id = false,
+                            Avatar = "/Images/Users/default-avatar.png"
                         };
 
                         _db.Configuration.ValidateOnSaveEnabled = false;
@@ -137,5 +141,16 @@ namespace WebSach.Controllers
             }
             return View();
         }
+
+        public string ProcessUpload(HttpPostedFileBase file)
+        {
+            if (file == null)
+            {
+                return "";
+            }
+            file.SaveAs(Server.MapPath("~/Images/Users/" + file.FileName));
+            return "~/Images/Users/" + file.FileName;
+        }
+
     }
 }

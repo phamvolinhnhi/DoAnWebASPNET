@@ -4,7 +4,6 @@
 @{
     ViewBag.Title = @Model.books.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
-}
 
 }
 <div class="div_middle">
@@ -36,25 +35,23 @@
                         </ul>
                     </div>
                     <ul class="list01">
-                <li>
+                        <li>
                             <a href="@Url.Action("The-Loai","Home",new { id = @Model.books.Categories.Category_Name})">@Model.books.Categories.Category_Name</a>
                         </li>
                     </ul>
-                        </div>
+                </div>
                 <div class="clear"></div>
-                    </div>
-                    <div class="book_info">
-                        <div class="book_name qtip">
-                            <h3>
+            </div>
+            <h3>
                 <i class="fa fa-info">
                 </i>
                 Giới thiệu
-                            </h3>
+            </h3>
             <div class="story-detail-info detail-content">
                 <p>
                     @Model.books.Description
                 </p>
-                        </div>
+            </div>
             <h3>
                 <i class="fa fa-database" aria-hidden="true">
                 </i>
@@ -67,10 +64,10 @@
                         <div class="works-chapter-item">
                             <div class="col-md-10 col-sm-10 col-xs-8 name-chap">
                                 <a href="@Url.Action("Chapter","Books", new { @id = c.Chapter_Id, @bookid = @c.Book_Id })">@c.Chapter_Name</a>
-                    </div>
+                            </div>
                             <div class="col-md-2 col-sm-2 col-xs-4 time-chap"></div>
                         </div>
-            }
+                    }
                 </div>
             </div>
             <div class="comment-container" id="comment_list">
@@ -88,10 +85,10 @@
                             <figure class="avatar">
                                 <img src="user.Avatar" alt="avatar" />
                             </figure>
-    </div>
+                        </div>
                         <div class="summary">
                             @using (Html.BeginForm("Comment", "Books", FormMethod.Post))
-                                 {
+                            {
                                 @Html.AntiForgeryToken()
 
                                 <div class="form-horizontal">
@@ -108,10 +105,10 @@
                                         </div>
                                     </div>
 
-        </div>
+                                </div>
                             }
 
-    </div>
+                        </div>
                     }
                 }
 
@@ -135,21 +132,9 @@
                                 @item.Update_at
                             </li>
                         </div>
-</div>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script>
+                    </div>
 
-    $(document).ready(function () {
-        var maxLength = 100;
-        $(".show-read-more").each(function () {
-            var myStr = $(this).text();
-            if ($.trim(myStr).length > maxLength) {
-                var newStr = myStr.substring(0, maxLength);
-                var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
-                $(this).empty().html(newStr);
-                $(this).append('<a href="javascript:void(0);" class="read-more">đọc tiếp...</a> ');
-                $(this).append('<span class="more-text">' + removedStr + '</span>');
-            }
+                }
 
             </div>
         </div>

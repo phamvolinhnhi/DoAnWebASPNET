@@ -1,0 +1,142 @@
+﻿@using WebSach.Models;
+@model WebSach.Models.BooksViewModel
+
+@{
+    ViewBag.Title = @Model.books.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<div class="div_middle">
+    <div class="main_content">
+        <div class="book_detail">
+            <div class="book_info">
+                <div class="book_avatar" itemtype="https://schema.org/ImageObject">
+                    <img itemprop="image" alt="@Model.books.Title" src="@Model.books.Avatar" />
+                </div>
+                <div class="book_other" itemscope itemtype="http://schema.org/Book">
+                    <h1 itemprop="name">@Model.books.Title</h1>
+                    <div class="txt">
+                        <ul class="list-info">
+                            <li class="author row">
+                                <p class="name col-xs-3">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                    Tác giả
+                                </p>
+                                <p class="col-xs-9">@Model.books.Author</p>
+                            </li>
+                            <li class="row">
+                                <p class="name col-xs-3">
+                                    <i class="fa fa-eye">
+                                    </i>
+                                    Luợt xem
+                                </p>
+                                <p class="col-xs-9">@Model.books.View</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <ul class="list01">
+                        <li>
+                            <a href="@Url.Action("The-Loai","Home",new { id = @Model.books.Categories.Category_Name})">@Model.books.Categories.Category_Name</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <h3>
+                <i class="fa fa-info">
+                </i>
+                Giới thiệu
+            </h3>
+            <div class="story-detail-info detail-content">
+                <p>
+                    @Model.books.Description
+                </p>
+            </div>
+            <h3>
+                <i class="fa fa-database" aria-hidden="true">
+                </i>
+                Danh sách chương
+            </h3>
+            <div class="list_chapter">
+                <div class="works-chapter-list">
+                    @foreach (Chapter c in Model.Chapters)
+                    {
+                        <div class="works-chapter-item">
+                            <div class="col-md-10 col-sm-10 col-xs-8 name-chap">
+                                <a href="@Url.Action("Chapter","Books", new { @id = c.Chapter_Id, @bookid = @c.Book_Id })">@c.Chapter_Name</a>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-4 time-chap"></div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="comment-container" id="comment_list">
+                <span class="story-detail-title">
+                    <i class="fa fa-comment"></i>
+                    Bình luận (@Model.Comments.Count())
+                </span>
+                @if (Session["UserName"] != null)
+                {
+                    WebBookDb db = new WebBookDb();
+                    var user = db.User.FirstOrDefault(u => u.User_Name == Session["UserName"].ToString());
+                    if (user != null)
+                    {
+                        <div class="item">
+                            <figure class="avatar">
+                                <img src="user.Avatar" alt="avatar" />
+                            </figure>
+                        </div>
+                        <div class="summary">
+                            @using (Html.BeginForm("Comment", "Books", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-horizontal">
+                                    <hr />
+                                    @Html.ValidationSummary(true, "", new { @class = "field-validation-error" })
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <input type="text" class="comment_input" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-10">
+                                            <input type="submit" value="Sign In" class="btn btn-default" />
+                                        </div>
+                                    </div>
+
+                                </div>
+                            }
+
+                        </div>
+                    }
+                }
+
+                @foreach (var item in Model.Comments)
+                {
+                    <div class="item">
+                        <figure class="avatar">
+                            <img src="@item.User.Avatar" alt="avatar" />
+                        </figure>
+                    </div>
+                    <div class="summary">
+                        <div class="info">
+                            <div class="comment_header">
+                                <span class="name">@item.User.Full_Name</span>
+                            </div>
+                            <div class="comment_content">@item.Comment_content</div>
+                        </div>
+                        <div class="comment_footer">
+                            <li>
+                                <i class="fa fa-clock-o"></i>
+                                @item.Update_at
+                            </li>
+                        </div>
+                    </div>
+
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

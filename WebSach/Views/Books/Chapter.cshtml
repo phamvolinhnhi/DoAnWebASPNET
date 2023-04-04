@@ -1,0 +1,48 @@
+﻿@model WebSach.Models.BooksViewModel
+@{
+    ViewBag.Title = "Chapter";
+}
+
+<div class="div_middle">
+    <div id="story-reading">
+        <div id="funbar" class="clearfix">
+            <div id="funbar-story" class="dropdown">
+                <button id="funbar-part-details" class="btn btn-toc dropdown-toggle" data-toggle="dropdown">
+                    <span class="cover">
+                        <img src="~/Images/Books/@Model.books.Avatar" alt="@Model.books.Title" />
+                    </span>
+                    <span class="info">
+                        <h2 class="title">
+                            @Model.books.Title
+                        </h2>
+                    </span>
+                    <span class="fa fa-caret-down" aria-hidden="true"></span>
+                </button>
+                <div class="class="dropdown-menu pull-left">
+                    <div class="toc-header text-center">
+                        <h6>
+                            <a class="on-navigate" href="@Url.Action("Sach","Book", new { id = Model.books.Book_Id})">@Model.books.Title</a>
+                        </h6>
+                        <small>Bảng mục lục</small>
+                    </div>
+                    <ul class="table-of-contents">
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var links = document.querySelectorAll('.dropdown-menu ul li a');
+    links.forEach(function (element) {
+        element.addEventListener('click', function (e) {
+            // PreventDefault to prevent redirect
+            e.preventDefault();
+            links.forEach(function (element) {
+                element.classList.remove('active');
+            });
+            this.classList.add('active');
+        });
+    });
+</script>

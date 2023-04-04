@@ -234,7 +234,7 @@
         display: none
     }
 
-    body.detail .content .main_content .book_detail .book_info .book_avatar {
+    body .content .main_content .book_detail .book_info .book_avatar {
         float: none;
         margin: 0 auto;
         margin-bottom: 20px

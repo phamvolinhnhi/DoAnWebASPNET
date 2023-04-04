@@ -33,7 +33,6 @@ namespace WebSach.Controllers
                 books = FindBookById(id.Value),
                 Chapters = _db.Chapter.Where(c => c.Book_Id == id.Value).ToList(),
                 Comments = _db.Comment.Where(c => c.Book_Id == id.Value).ToList(),
-
             };
             return View(booksviewmodel);
         }
@@ -49,7 +48,6 @@ namespace WebSach.Controllers
         {
             return _db.Books.FirstOrDefault(p => p.Book_Id == id);
         }
-
         public ActionResult Chapter(int? bookid, int? id)
         {
             if (id == null || bookid == null)
@@ -57,6 +55,7 @@ namespace WebSach.Controllers
                 return HttpNotFound();
             }
             Chapter chapter = _db.Chapter.Where(c => c.Chapter_Id == id.Value && c.Book_Id == bookid).FirstOrDefault();
+
             if (chapter == null)
             {
                 return HttpNotFound();

@@ -1,0 +1,91 @@
+﻿@model WebSach.Models.Books
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/WebAdmin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Books</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Categories.Category_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Categories.Category_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Full_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Full_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Author)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Create_at)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Create_at)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Update_at)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Update_at)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Avatar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Avatar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.View)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.View)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Book_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

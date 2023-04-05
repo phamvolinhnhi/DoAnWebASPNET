@@ -17,25 +17,53 @@ namespace WebSach.Controllers
         }
 
         // GET: Books
+        //public ActionResult Index(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return View("Index");
+        //    }
+        //    Books books = _db.Books.SingleOrDefault(c => c.Book_Id == id);
+        //    if (books == null)
+        //    {
+        //        return View("Index");
+        //    }
+        //    var booksviewmodel = new BooksViewModel
+        //    {
+        //        book = books,
+        //        Chapters = _db.Chapter.Where(c => c.Book_Id == id.Value).ToList(),
+        //    };
+        //    return View(booksviewmodel);
+        //}
         public ActionResult Index(int? id)
         {
             if (id == null)
             {
-                return HttpNotFound();
+                return View("Index", "Home");
             }
-            Books books = FindBookById(id.Value);
+            Books books = _db.Books.SingleOrDefault(c => c.Book_Id == id);
             if (books == null)
             {
-                return HttpNotFound();
+                return View("Index", "Home");
             }
-            var booksviewmodel = new BooksViewModel
+            if (Session["UserName"] != null)
             {
-                books = FindBookById(id.Value),
-                Chapters = _db.Chapter.Where(c => c.Book_Id == id.Value).ToList(),
-                Comments = _db.Comment.Where(c => c.Book_Id == id.Value).ToList(),
+                string name = Session["UserName"].ToString();
+                var find = _db.Follow.FirstOrDefault(f => f.bookId == id && f.userName == name);
+                if (find == null)
+                    books.isFollowing = false;
+                else books.isFollowing = true;
+            }
 
+
+            BooksViewModel viewModel = new BooksViewModel
+            {
+                book = books,
+                Chapters = _db.Chapter.Where(c => c.Book_Id == id).ToList(),
             };
-            return View(booksviewmodel);
+
+            return View(viewModel);
+
         }
 
         public List<Books> GetAll() => _db.Books.ToList();
@@ -47,7 +75,7 @@ namespace WebSach.Controllers
 
         public Books FindBookById(int id)
         {
-            return _db.Books.FirstOrDefault(p => p.Book_Id == id);
+            return _db.Books.SingleOrDefault(c => c.Book_Id == id);
         }
 
         public ActionResult Chapter(int? bookid, int? id)
@@ -61,12 +89,34 @@ namespace WebSach.Controllers
             {
                 return HttpNotFound();
             }
-            return View(chapter);
+            var viewModel = new BooksViewModel
+            {
+                book = _db.Books.FirstOrDefault(b => b.Book_Id == bookid),
+                Chapters = _db.Chapter.Where(c => c.Book_Id == bookid).ToList(),
+                chapter = chapter
+            };
+            return View(viewModel);
         }
 
-        public void Comment(BooksViewModel viewModel)
+        public void Follow(int bookId)
         {
-
+            string name = Session["UserName"].ToString();
+            var find = _db.Follow.FirstOrDefault(f => f.bookId == bookId && f.userName == name);
+            if (find == null)
+            {
+                var follow = new Follow
+                {
+                    userName = name,
+                    bookId = bookId
+                };
+                _db.Follow.Add(follow);
+            }
+            else
+            {
+                _db.Follow.Remove(find);
+            }
+            _db.SaveChanges();
         }
+
     }
 }

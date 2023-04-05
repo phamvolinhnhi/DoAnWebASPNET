@@ -65,6 +65,9 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.9\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -73,6 +76,12 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.9\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.9\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -133,22 +142,20 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\WebAdmin\WebAdminAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202304041200281_create.cs" />
-    <Compile Include="Migrations\202304041200281_create.designer.cs">
-      <DependentUpon>202304041200281_create.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Books.cs" />
     <Compile Include="Models\BooksViewModel.cs" />
     <Compile Include="Models\Categories.cs" />
     <Compile Include="Models\Chapter.cs" />
     <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\Follow.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Models\WebBookDb.cs" />
@@ -196,6 +203,7 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\WebAdmin\Views\web.config" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -207,6 +215,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\myscripts\JavaScript.js" />
     <Content Include="Scripts\myscripts\myjs.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -223,14 +232,18 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Books\Index.cshtml" />
-    <Content Include="Views\Books\Sach.cshtml" />
-    <Content Include="Views\Books\Chapter.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Home\Books.cshtml" />
+    <Content Include="Views\Home\SachMoi.cshtml" />
+    <Content Include="Views\Shared\_Category.cshtml" />
+    <Content Include="Views\Books\Chapter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\WebAdmin\Controllers\" />
+    <Folder Include="Areas\WebAdmin\Data\" />
+    <Folder Include="Areas\WebAdmin\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
@@ -259,11 +272,6 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202304041200281_create.resx">
-      <DependentUpon>202304041200281_create.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -282,7 +290,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>58581</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44354/</IISUrl>
+          <IISUrl>https://localhost:44370/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

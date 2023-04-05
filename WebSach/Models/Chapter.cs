@@ -1,4 +1,4 @@
-﻿namespace WebSach.Models
+namespace WebSach.Models
 {
     using System;
     using System.Collections.Generic;

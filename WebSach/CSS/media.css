@@ -1,4 +1,6 @@
-﻿@media (max-width: 1440px) input[type="text"], input[type="email"], input[type="password"] {
+﻿body {
+}
+@media (max-width: 1440px) input[type="text"], input[type="email"], input[type="password"] {
     width: 94%;
 }
 
@@ -187,7 +189,7 @@
 
     body header .bottom .book_tags {
         position: unset;
-        display: none !important;
+        display: none;
     }
 
         body header .bottom .book_tags .book_tags_content {
@@ -234,7 +236,7 @@
         display: none
     }
 
-    body.detail .content .main_content .book_detail .book_info .book_avatar {
+    body .content .main_content .book_detail .book_info .book_avatar {
         float: none;
         margin: 0 auto;
         margin-bottom: 20px

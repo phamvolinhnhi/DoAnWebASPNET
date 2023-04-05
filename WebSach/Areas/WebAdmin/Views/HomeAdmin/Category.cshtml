@@ -1,0 +1,12 @@
+﻿
+@model List<WebSach.Models.Categories>
+
+@if (Model != null && Model.Count > 0)
+{
+    <ul>
+        @foreach (var category in Model)
+        {
+            <li>@Html.ActionLink(category.Category_Name, "Details", "Books", new { id = category.Category_Id }, null)</li>
+        }
+    </ul>
+}

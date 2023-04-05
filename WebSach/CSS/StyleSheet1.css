@@ -224,13 +224,14 @@ body {
             left: 0;
             color: #333;
             z-index: 2;
+            display: none;
         }
 
             body header .bottom .book_tags .book_tags_content {
                 margin: 22px 0;
             }
 
-            body header .bottom .book_tags p {
+            body header .bottom .book_tags a {
                 float: left;
                 width: 140px;
                 line-height: 40px;
@@ -413,7 +414,7 @@ a {
     width: 100%
 }
 
-input[type="submit"] {
+.form-group input[type="submit"] {
     font-size: .9em;
     color: #fff;
     background: #76b852;
@@ -692,6 +693,7 @@ ul.list-info {
 .comment-container {
     padding-top: 20px;
     padding-bottom: 40px;
+    font-family: 'Roboto', sans-serif;
 }
 
     .comment-container .story-detail-title {
@@ -723,27 +725,46 @@ ul.list-info {
             margin-left: 55px;
             position: relative;
         }
+
             .comment-container .item .summary .info {
                 border: 1px solid #d8d8d8;
                 padding: 5px 10px;
                 background-color: #fffdfd;
             }
+
+.send_comment {
+    float: right;
+    font-family: 'Roboto', sans-serif;
+
+    font-size: .9em;
+    color: #fff;
+    background: #76b852;
+    outline: none;
+    border: 1px solid #76b852;
+    cursor: pointer;
+    padding: 0.4em;
+    letter-spacing: 4px;
+}
+
 .comment-header {
     overflow: hidden;
     border-bottom: solid 1px #d8d8d8;
     padding-bottom: 5px;
 }
+
 .comment-content {
     overflow: hidden;
     display: block;
     padding: 10px 0 5px;
     word-wrap: break-word;
 }
+
 .comment-footer {
     margin: 0;
     padding: 0;
     margin-bottom: 5px;
 }
+
     .comment-footer > li {
         display: inline-block;
         margin-top: 5px;

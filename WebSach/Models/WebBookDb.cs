@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
@@ -16,6 +16,7 @@ namespace WebSach.Models
         public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<Comment> Comment { get; set; }
         public virtual DbSet<Chapter> Chapter { get; set; }
+        public virtual DbSet<Follow> Follow { get; set; }
         public virtual DbSet<User> User { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

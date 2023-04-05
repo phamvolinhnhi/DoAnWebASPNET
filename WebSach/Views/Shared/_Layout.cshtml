@@ -1,14 +1,14 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - DoAn</title>
     <link rel="shortcut icon" href="~/Images/shortcuticon.png" type="image/png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="chrome-extension://gobpkdmjnhpopmpddhmhmbhkiienpfdo/css/translate_popup.css" />
-    <link rel="stylesheet" href="~/CSS/StyleSheet1.css" type="text/css" />
-    <link rel="stylesheet" href="~/CSS/media2.css" />
+    <link rel="stylesheet" href="~/CSS/StyleSheet2.css" type="text/css" />
+    <link rel="stylesheet" href="~/CSS/media.css" />
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
@@ -71,97 +71,37 @@
                             @Html.ActionLink("Trang chủ", "Index", "Home")
                         </p>
                     </li>
-                    <li class="menu_hidden">
+                    <li class="menu_hidden" onclick="toggle_visibility('the_loai');">
                         <p class="tags_name pc_hover mega_menu">
                             Thể loại
                             <i class="fa fa-caret-down"></i>
                         </p>
-                        <div class="hidden_menu book_tags">
+                        <div class="hidden_menu book_tags" id="the_loai">
                             <div class="div_middle">
                                 <div class="book_tags_content">
-                                    <p>
-                                        @Html.ActionLink("Hành động", "The-Loai", "Home", new { id = "Hanh-Dong" })
-                                    </p>
-                                    <p>
-                                        @Html.ActionLink("Trinh thám", "The-Loai", "Home", new { id = "Trinh-tham" })
-                                    </p>
-                                    <p>
-                                        @Html.ActionLink("Tâm lý", "Tam-ly", "The-Loai")
-                                    </p>
-                                    <p>
-                                        @Html.ActionLink("V", "Tinh-cam", "The-Loai")
-                                    </p>
-                                    <p>
-                                        @Html.ActionLink("Tình cảm", "Tinh-cam", "The-Loai")
-                                    </p>
-                                    <p>
-                                        @Html.ActionLink("Tình cảm", "Tinh-cam", "The-Loai")
-                                    </p>
-                                    <p>
-                                        @Html.ActionLink("Tình cảm", "Tinh-cam", "The-Loai")
-                                    </p>
-                                    <p>
-                                        @Html.ActionLink("Tình cảm", "Tinh-cam", "The-Loai")
-                                    </p>
-                                    <p>
-                                        @Html.ActionLink("Tình cảm", "Tinh-cam", "The-Loai")
-                                    </p>
-                                    <p>
-                                        @Html.ActionLink("Tình cảm", "Tinh-cam", "The-Loai")
-                                    </p>
-                                    <p>
-                                        @Html.ActionLink("Tình cảm", "Tinh-cam", "The-Loai")
-                                    </p>
-                                    <p>
-                                        @Html.ActionLink("Tình cảm", "Tinh-cam", "The-Loai")
-                                    </p>
-                                    <p>
-                                        @Html.ActionLink("Tình cảm", "Tinh-cam", "The-Loai")
-                                    </p>
-                                    <p>
-                                        @Html.ActionLink("Tình cảm", "Tinh-cam", "The-Loai")
-                                    </p>
-                                    <p>
-                                        @Html.ActionLink("Tình cảm", "Tinh-cam", "The-Loai")
-                                    </p>
-                                    <p>
-                                        @Html.ActionLink("Tình cảm", "Tinh-cam", "The-Loai")
-                                    </p>
-                                    <p>
-                                        @Html.ActionLink("Tình cảm", "Tinh-cam", "The-Loai")
-                                    </p>
+                                    @Html.Action("Category", "Home")
                                     <div class="clear"></div>
                                 </div>
                             </div>
                         </div>
                     </li>
                     <li class="menu_hidden">
-                        <p>
-                            @Html.ActionLink("Sách mới", "Sach-moi")
-                        </p>
+                        <a href="@Url.Action("SachMoi", "Home")">Sách mới</a>
                     </li>
+
                     <li class="menu_hidden">
-                        <p>
-                            @Html.ActionLink("Sách miễn phí", "Sach-mien-phi")
-                        </p>
-                    </li>
-                    <li class="menu_hidden">
-                        <p class="tags_name pc_hover mega_menu">
+                        <p class="tags_name pc_hover mega_menu" onclick="toggle_visibility('xep_hang');">
                             Xếp hạng
                             <i class="fa fa-caret-down"></i>
                         </p>
-                        <div class="hidden_menu book_tags">
+                        <div class="hidden_menu book_tags" id="xep_hang">
                             <div class="div_middle">
                                 <div class="book_tags_content">
-                                    <p>
-                                        @Html.ActionLink("Top ngày", "Top-ngay")
-                                    </p>
-                                    <p>
-                                        @Html.ActionLink("Top tháng", "Top-thang")
-                                    </p>
-                                    <p>
-                                        @Html.ActionLink("Top tháng", "Top-thang")
-                                    </p>
+                                    <a href="@Url.Action("Top ngày", "Top-ngay")">Top ngày</a>
+                                    <a href="@Url.Action("Top tháng", "Top-ngay")">Top tháng</a>
+                                    <a href="@Url.Action("Top năm", "Top-ngay")">Top năm</a>
+                                    <div class="clear"></div>
+
                                 </div>
                             </div>
                         </div>
@@ -198,6 +138,24 @@
     @Scripts.Render("~/bundles/bootstrap")
 
     @RenderSection("scripts", required: false)
+    <script>!function (s, u, b, i, z) { var o, t, r, y; s[i] || (s._sbzaccid = z, s[i] = function () { s[i].q.push(arguments) }, s[i].q = [], s[i]("setAccount", z), r = ["widget.subiz.net", "storage.googleapis" + (t = ".com"), "app.sbz.workers.dev", i + "a" + (o = function (k, t) { var n = t <= 6 ? 5 : o(k, t - 1) + o(k, t - 3); return k !== t ? n : n.toString(32) })(20, 20) + t, i + "b" + o(30, 30) + t, i + "c" + o(40, 40) + t], (y = function (k) { var t, n; s._subiz_init_2094850928430 || r[k] && (t = u.createElement(b), n = u.getElementsByTagName(b)[0], t.async = 1, t.src = "https://" + r[k] + "/sbz/app.js?accid=" + z, n.parentNode.insertBefore(t, n), setTimeout(y, 2e3, k + 1)) })(0)) }(window, document, "script", "subiz", "acrpxgbxwimrhqclghys")</script>
 
+    <script type="text/javascript">
+        function toggle_visibility(id) {
+            var box = document.getElementById(id);
+            if (box.id == "the_loai") 
+                var box2 = document.getElementById("xep_hang");
+            else {
+                var box2 = document.getElementById("the_loai");
+            }
+            if (box.style.display == 'block') {
+                box.style.display = 'none';
+            }
+            else {
+                box.style.display = 'block';
+                }
+                box2.style.display = 'none';
+        }
+    </script>
 </body>
 </html>

@@ -187,7 +187,7 @@
 
     body header .bottom .book_tags {
         position: unset;
-        display: none !important;
+        display: none ;
     }
 
         body header .bottom .book_tags .book_tags_content {

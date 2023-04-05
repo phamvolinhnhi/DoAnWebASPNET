@@ -1,0 +1,296 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - DoAn</title>
+    <link rel="shortcut icon" href="~/Content/Images/shortcuticon.png" type="image/png" />
+    <link rel="canonical" href="localhost" />
+    <link rel="stylesheet" href="~/CSS/StyleSheet1.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="chrome-extension://gobpkdmjnhpopmpddhmhmbhkiienpfdo/css/translate_popup.css" />
+    <style data-jss data-meta="MuiDialog">
+        @@media print {
+            .MuiDialog-root {
+                position: absolute !important;
+            }
+        }
+
+        .MuiDialog-scrollPaper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .MuiDialog-scrollBody {
+            overflow-x: hidden;
+            overflow-y: auto;
+            text-align: center;
+        }
+
+            .MuiDialog-scrollBody:after {
+                width: 0;
+                height: 100%;
+                content: "";
+                display: inline-block;
+                vertical-align: middle;
+            }
+
+        .MuiDialog-container {
+            height: 100%;
+            outline: 0;
+        }
+
+        @@media print {
+            .MuiDialog-container {
+                height: auto;
+            }
+        }
+
+        .MuiDialog-paper {
+            margin: 32px;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        @@media print {
+            .MuiDialog-paper {
+                box-shadow: none;
+                overflow-y: visible;
+            }
+        }
+
+        .MuiDialog-paperScrollPaper {
+            display: flex;
+            max-height: calc(100% - 64px);
+            flex-direction: column;
+        }
+
+        .MuiDialog-paperScrollBody {
+            display: inline-block;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        .MuiDialog-paperWidthFalse {
+            max-width: calc(100% - 64px);
+        }
+
+        .MuiDialog-paperWidthXs {
+            max-width: 444px;
+        }
+
+        @@media (max-width:507.95px) {
+            .MuiDialog-paperWidthXs.MuiDialog-paperScrollBody {
+                max-width: calc(100% - 64px);
+            }
+        }
+
+        .MuiDialog-paperWidthSm {
+            max-width: 600px;
+        }
+
+        @@media (max-width:663.95px) {
+            .MuiDialog-paperWidthSm.MuiDialog-paperScrollBody {
+                max-width: calc(100% - 64px);
+            }
+        }
+
+        .MuiDialog-paperWidthMd {
+            max-width: 960px;
+        }
+
+        @@media (max-width:1023.95px) {
+            .MuiDialog-paperWidthMd.MuiDialog-paperScrollBody {
+                max-width: calc(100% - 64px);
+            }
+        }
+
+        .MuiDialog-paperWidthLg {
+            max-width: 1280px;
+        }
+
+        @@media (max-width:1343.95px) {
+            .MuiDialog-paperWidthLg.MuiDialog-paperScrollBody {
+                max-width: calc(100% - 64px);
+            }
+        }
+
+        .MuiDialog-paperWidthXl {
+            max-width: 1920px;
+        }
+
+        @@media (max-width:1983.95px) {
+            .MuiDialog-paperWidthXl.MuiDialog-paperScrollBody {
+                max-width: calc(100% - 64px);
+            }
+        }
+
+        .MuiDialog-paperFullWidth {
+            width: calc(100% - 64px);
+        }
+
+        .MuiDialog-paperFullScreen {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            max-width: 100%;
+            max-height: none;
+            border-radius: 0;
+        }
+
+            .MuiDialog-paperFullScreen.MuiDialog-paperScrollBody {
+                margin: 0;
+                max-width: 100%;
+            }
+    </style>
+    @*@Scripts.Render("~/bundles/modernizr")*@
+
+</head>
+
+<body class="homepage light">
+    <header>
+        <div class="top">
+            <div class="div_middle">
+                <div class="logo">
+                    <a href="/" title="DoAn - Sách điện tử">
+                        <img alt="DoAn" src="~/Content/Images/shortcuticon.png" style="max-height:50px" />
+                    </a>
+                    <div class="clear"></div>
+                </div>
+                <div class="right">
+                    <ul>
+                        <li onclick="$('header .top_search').slideDown()" class="other">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </li>
+                        <li>
+                            <button onclick="popup('register')">Đăng ký</button>
+                        </li>
+                        <li>
+                            <button onclick="popup('login')">Đăng nhập</button>
+                        </li>
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+                <div class="top_search" style="display:block">
+                    <input class="search" id="search_input" placeholder="Bạn muốn tìm truyện gì?" />
+                    <button>
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                    <div class="search_result">
+                        <ul></ul>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="div_middle">
+                <ul id="header_left_menu">
+
+                    <li class="menu_hidden">
+                        <p class="tags_name pc_hover mega_menu">
+                            <a class="fa fa-bars" aria-hidden="true" style="padding-right: 10px"></a>
+                        </p>
+                        <div class="hidden_menu1">
+                            <div>
+                                <p>
+                                    <a title="Quản Lý Sách">Quản Lý Sách</a>
+                                </p>
+                                <p>
+                                    <a title="Webtoon">Quản Lý Người Dùng</a>
+                                </p>
+                                <p>
+                                    <a title="Trinh thám">Quản Lý Reaction</a>
+                                </p>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </li>
+
+
+                    <li>
+                        @Html.ActionLink("HomeAdmin", "Index", "Home")
+                    </li>
+
+                    <li>
+                        <a class="tags_name pc_hover" href="https://localhost:44370/">Trang chủ</a>
+                    </li>
+                    <li class="menu_hidden">
+                        <p class="tags_name pc_hover mega_menu">
+                            Thể loại
+                            <i class="fa fa-caret-down"></i>
+                        </p>
+                        <div class="hidden_menu book_tags">
+                            <div class="book_tags_content">
+                                <p>
+                                    <a title="Hành động" href="https://localhost:44370/Home/The_Loai/hanh-dong">Hành dộng</a>
+                                </p>
+                                <p>
+                                    <a title="Webtoon" href="https://localhost:44370/Home/the_loai/webtoon">Webtoon</a>
+                                </p>
+                                <p>
+                                    <a title="Trinh thám" href="https://localhost:44370/Home/the-loai/trinh-tham">Trinh thám</a>
+                                </p>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="menu_hidden">
+                        <a class="tags_name pc_hover" href="https://localhost:44370/hot">HOT</a>
+                    </li>
+                    <li class="menu_hidden">
+                        <p class="tags_name pc_hover mega_menu">
+                            Xếp hạng
+                            <i class="fa fa-caret-down"></i>
+                        </p>
+                        <div class="hidden_menu book_tags">
+                            <div class="div_middle">
+                                <div class="book_tags_content">
+                                    <p>
+                                        <a rel="nofollow" href="https://localhost:44391/top-ngay">Top Ngày</a>
+                                    </p>
+                                    <p>
+                                        <a rel="nofollow" href="https://localhost:44391/top-tuan">Top Tuần</a>
+                                    </p>
+                                    <p>
+                                        <a rel="nofollow" href="https://localhost:44391/top-thang">Top Tháng</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="menu_hidden">
+                        <a class="tags_name pc_hover" href="https://localhost:44391/theo-doi">Theo dõi</a>
+                    </li>
+                    <li class="menu_hidden">
+                        <a class="tags_name pc_hover" href="https://localhost:44391/lich-su">Lịch sử</a>
+                    </li>
+                </ul>
+                <div class="clear"></div>
+            </div>
+            <div class="nav_menu mobile_display">
+                <i onclick="show_bottom_menu(this)" class="fa fa-list" aria-hidden="true"></i>
+            </div>
+        </div>
+    </header>
+    <script>!function (s, u, b, i, z) { var o, t, r, y; s[i] || (s._sbzaccid = z, s[i] = function () { s[i].q.push(arguments) }, s[i].q = [], s[i]("setAccount", z), r = ["widget.subiz.net", "storage.googleapis" + (t = ".com"), "app.sbz.workers.dev", i + "a" + (o = function (k, t) { var n = t <= 6 ? 5 : o(k, t - 1) + o(k, t - 3); return k !== t ? n : n.toString(32) })(20, 20) + t, i + "b" + o(30, 30) + t, i + "c" + o(40, 40) + t], (y = function (k) { var t, n; s._subiz_init_2094850928430 || r[k] && (t = u.createElement(b), n = u.getElementsByTagName(b)[0], t.async = 1, t.src = "https://" + r[k] + "/sbz/app.js?accid=" + z, n.parentNode.insertBefore(t, n), setTimeout(y, 2e3, k + 1)) })(0)) }(window, document, "script", "subiz", "acrpxgbxwimrhqclghys")</script>
+
+    <div class="container body-content" style="text-indent: 100px">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - DoAn</p>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    @RenderSection("upload", required: false)
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/myscripts/JavaScript.js" type="text/javascript"></script>
+    <script src="~/Scripts/myscripts/JavaScript.js" type="text/javascript1"></script>
+    <script src="~/Scripts/myscripts/JavaScript.js" type="text/javascript2"></script>
+
+</body>
+</html>

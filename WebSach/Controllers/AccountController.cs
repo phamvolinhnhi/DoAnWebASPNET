@@ -45,8 +45,9 @@ namespace WebSach.Controllers
         {
             if (ModelState.IsValid)
             {
-                var f_password = GetMD5(_user.Password);
-                var data = _db.User.Where(s => s.User_Name.Equals(_user.User_Name) && s.Password.Equals(f_password)).ToList();
+                var f_password = GetMD5(_user.
+                    Password);
+                var data = _db.User.Where(s => s.User_Name.Equals(_user.User_Name) && s.Password.Equals(f_password) && s.Permission_Id == false).ToList();
                 if (data.Count() > 0)
                 {
                     //add session

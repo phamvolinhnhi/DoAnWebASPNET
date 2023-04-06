@@ -16,25 +16,6 @@ namespace WebSach.Controllers
             _db = new WebBookDb();
         }
 
-        // GET: Books
-        //public ActionResult Index(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return View("Index");
-        //    }
-        //    Books books = _db.Books.SingleOrDefault(c => c.Book_Id == id);
-        //    if (books == null)
-        //    {
-        //        return View("Index");
-        //    }
-        //    var booksviewmodel = new BooksViewModel
-        //    {
-        //        book = books,
-        //        Chapters = _db.Chapter.Where(c => c.Book_Id == id.Value).ToList(),
-        //    };
-        //    return View(booksviewmodel);
-        //}
         public ActionResult Index(int? id)
         {
             if (id == null)
@@ -54,8 +35,6 @@ namespace WebSach.Controllers
                     books.isFollowing = false;
                 else books.isFollowing = true;
             }
-
-
             BooksViewModel viewModel = new BooksViewModel
             {
                 book = books,

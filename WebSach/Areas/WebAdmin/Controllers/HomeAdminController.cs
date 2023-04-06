@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿//using Microsoft.AspNetCore.Mvc;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -14,7 +16,7 @@ namespace WebSach.Areas.WebAdmin.Controllers
 
     public class HomeAdminController : Controller
     {
-        private Model1 db = new Model1();
+        private WebBookDb db = new WebBookDb();
         // GET: WebAdmin/HomeAdmin
         public ActionResult Index()
         {
@@ -40,6 +42,33 @@ namespace WebSach.Areas.WebAdmin.Controllers
 
             return View();
         }
+        public ActionResult TheLoai(int? page, string search, int? type)
+        {
+            page = page ?? 1;
+            int pageSize = 24;
+            if (type == null)
+            {
+                search = search ?? "";
+                ViewBag.Keyword = search;
+                var Books = GetAll(search).ToPagedList(page.Value, pageSize);
+                return View(Books);
+            }
+            else
+            {
+                var Books = GetAll(type).ToPagedList(page.Value, pageSize);
+                return View(Books);
+            }
+        }
+        public List<Books> GetAll() => db.Books.ToList();
+        public List<Books> GetAll(string searchKey)
+        {
+            return db.Books.Where(p => p.Title.Contains(searchKey)).ToList();
+        }
+        public List<Books> GetAll(int? type)
+        {
+            return db.Books.Where(p => p.Category_Id == type).ToList();
+        }
+
         public ActionResult TopBooks()
         {
             var topBooks = db.Books.OrderByDescending(b => b.View).Take(3).ToList();
@@ -52,6 +81,26 @@ namespace WebSach.Areas.WebAdmin.Controllers
             return PartialView("_Category", Category);
         }
 
+        public ActionResult SachMoi(int? page)
+        {
+            page = page ?? 1;
+            int pageSize = 24;
+            return View(GetAllOrderByDate().ToPagedList(page.Value, pageSize));
+        }
+        public ActionResult XepHang(int? page)
+        {
+            page = page ?? 1;
+            int pageSize = 24;
+            return View(GetAllOrderByView().ToPagedList(page.Value, pageSize));
+        }
 
+        public List<Books> GetAllOrderByView()
+        {
+            return db.Books.OrderBy(c => c.View).ToList();
+        }
+        public List<Books> GetAllOrderByDate()
+        {
+            return db.Books.OrderBy(c => c.View).ToList();
+        }
     }
 }

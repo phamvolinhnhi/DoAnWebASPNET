@@ -2,23 +2,27 @@
 
 namespace WebSach.Areas.WebAdmin
 {
-    public class WebAdminAreaRegistration : AreaRegistration 
+    public class WebAdminAreaRegistration : AreaRegistration
     {
-        public override string AreaName 
+        public override string AreaName
         {
-            get 
+            get
             {
                 return "WebAdmin";
             }
         }
 
-        public override void RegisterArea(AreaRegistrationContext context) 
+        public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
                 "WebAdmin_default",
                 "WebAdmin/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                 defaults: new { area = "WebAdmin", controller = "HomeAdmin", action = "Index", id = UrlParameter.Optional }
+
             );
+
+
+
         }
     }
 }

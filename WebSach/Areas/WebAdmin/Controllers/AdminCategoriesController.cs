@@ -8,12 +8,13 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebSach.Models;
+using System.Reflection;
 
 namespace WebSach.Areas.WebAdmin.Controllers
 {
     public class AdminCategoriesController : Controller
     {
-        private Model1 db = new Model1();
+        private WebBookDb db = new WebBookDb();
 
         // GET: WebAdmin/AdminCategories
         public async Task<ActionResult> Index()

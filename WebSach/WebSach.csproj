@@ -62,6 +62,7 @@
     <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -143,6 +144,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\WebAdmin\Controllers\AdminBooksController.cs" />
+    <Compile Include="Areas\WebAdmin\Controllers\AdminCategoriesController.cs" />
+    <Compile Include="Areas\WebAdmin\Controllers\AdminChaptersController.cs" />
+    <Compile Include="Areas\WebAdmin\Controllers\AdminUsersController.cs" />
+    <Compile Include="Areas\WebAdmin\Controllers\HomeAdminController.cs" />
     <Compile Include="Areas\WebAdmin\WebAdminAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BooksController.cs" />
@@ -154,6 +160,7 @@
     <Compile Include="Models\BooksViewModel.cs" />
     <Compile Include="Models\Categories.cs" />
     <Compile Include="Models\Chapter.cs" />
+    <Compile Include="Models\ChartViewModel.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Follow.cs" />
     <Compile Include="Models\User.cs" />
@@ -162,6 +169,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Chapter_data\chap1.txt" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -179,10 +187,12 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="CSS\admin.css" />
     <Content Include="CSS\media.css" />
     <Content Include="CSS\media2.css" />
     <Content Include="CSS\StyleSheet1.css" />
     <Content Include="CSS\StyleSheet2.css" />
+    <Content Include="CSS\user.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -204,6 +214,39 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\WebAdmin\Views\web.config" />
+    <Content Include="Areas\WebAdmin\Views\AdminBooks\Create.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminBooks\Delete.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminBooks\Details.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminBooks\Edit.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminBooks\Index.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminCategories\Create.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminCategories\Delete.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminCategories\Details.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminCategories\Edit.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminCategories\Index.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminChapters\Create.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminChapters\Delete.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminChapters\Details.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminChapters\Edit.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminChapters\Index.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminUsers\Create.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminUsers\Delete.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminUsers\Details.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminUsers\Edit.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminUsers\Index.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\HomeAdmin\Category.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\HomeAdmin\Index.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\HomeAdmin\TopBooks.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\Shared\Error.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\Shared\_TopBooks.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\Shared\_Category.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\HomeAdmin\SachMoi.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\HomeAdmin\XepHang.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\HomeAdmin\TheLoai.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminUsers\Login.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminUsers\Register.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -238,12 +281,13 @@
     <Content Include="Views\Home\SachMoi.cshtml" />
     <Content Include="Views\Shared\_Category.cshtml" />
     <Content Include="Views\Books\Chapter.cshtml" />
+    <Content Include="Views\Account\Follow.cshtml" />
+    <Content Include="Views\Home\XepHang.cshtml" />
+    <Content Include="Views\Shared\_TopBooks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\WebAdmin\Controllers\" />
     <Folder Include="Areas\WebAdmin\Data\" />
-    <Folder Include="Areas\WebAdmin\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

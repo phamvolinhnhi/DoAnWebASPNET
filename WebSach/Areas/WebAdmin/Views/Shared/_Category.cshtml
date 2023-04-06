@@ -6,7 +6,10 @@
     <ul>
         @foreach (var category in Model)
         {
-            <a href="@Url.Action("Index", "Home", new { type = category.Category_Id })">@category.Category_Name</a>
+            <ul>
+                <a href="@Url.Action("TheLoai", "HomeAdmin", new { type = category.Category_Id })">@category.Category_Name</a>
+
+            </ul>
         }
     </ul>
 }

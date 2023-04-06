@@ -1,0 +1,14 @@
+﻿
+
+@model List<WebSach.Models.Books>
+
+@if (Model != null && Model.Count > 0)
+{
+    <h4>Top 3 sách xem nhiều nhất</h4>
+    <ul>
+        @foreach (var book in Model)
+        {
+            <li>@Html.ActionLink(book.Title, "Details", "Books", new { id = book.Book_Id }, null) - @book.View lượt xem</li>
+        }
+    </ul>
+}

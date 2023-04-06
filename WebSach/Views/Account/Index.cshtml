@@ -38,8 +38,31 @@
             <div class="relative">
                 <h2 class="posttitle">Truyện theo dõi</h2>
             </div>
+            <div class="list_grid_out">
+                <ul class="list_grid grid" id="list_new">
+                    @foreach (var item in Model.follows)
+                    {
+                        <li>
+                            <div class="book_avatar">
+                                <a href="@Url.Action("Index","Books", new { id = item.Book_Id})">
+                                    <img class="center" src="@item.Avatar" alt="@item.Title" />
+                                </a>
+                                <div class="top-notice">
+                                    <span class="time-ago">@item.Update_at</span>
+                                </div>
+                            </div>
+                            <div class="book_info">
+                                <div class="book_name qtip">
+                                    <h3>
+                                        <a title="@item.Title" href="/@item.Book_Id">@item.Title</a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+
+
         </div>
-
-
-    </div>
 </div>

@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="~/Images/shortcuticon.png" type="image/png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="chrome-extension://gobpkdmjnhpopmpddhmhmbhkiienpfdo/css/translate_popup.css" />
-    <link rel="stylesheet" href="~/CSS/StyleSheet2.css" type="text/css" />
+    <link rel="stylesheet" href="~/CSS/user.css" type="text/css" />
     <link rel="stylesheet" href="~/CSS/media.css" />
     @Scripts.Render("~/bundles/modernizr")
 
@@ -90,27 +90,14 @@
                     </li>
 
                     <li class="menu_hidden">
-                        <p class="tags_name pc_hover mega_menu" onclick="toggle_visibility('xep_hang');">
-                            Xếp hạng
-                            <i class="fa fa-caret-down"></i>
-                        </p>
-                        <div class="hidden_menu book_tags" id="xep_hang">
-                            <div class="div_middle">
-                                <div class="book_tags_content">
-                                    <a href="@Url.Action("Top ngày", "Top-ngay")">Top ngày</a>
-                                    <a href="@Url.Action("Top tháng", "Top-ngay")">Top tháng</a>
-                                    <a href="@Url.Action("Top năm", "Top-ngay")">Top năm</a>
-                                    <div class="clear"></div>
+                        <a href="@Url.Action("XepHang", "Home")">Xếp hạng</a>
 
-                                </div>
-                            </div>
-                        </div>
                     </li>
                     <li class="menu_hidden">
-                        @Html.ActionLink("Theo dõi", "Theo-doi")
+                        @Html.ActionLink("Theo dõi","Follow", "Account")
                     </li>
                     <li class="menu_hidden">
-                        @Html.ActionLink("Lịch sử", "Lich-su")
+                        @Html.ActionLink("Lịch sử","History", "Account")
                     </li>
                 </ul>
                 <div class="clear"></div>
@@ -119,6 +106,7 @@
                 <i onclick="show_bottom_menu(this)" class="fa fa-list" aria-hidden="true"></i>
             </div>
         </div>
+        <div class="clear"></div>
     </header>
     <div class="content">
         @RenderBody()

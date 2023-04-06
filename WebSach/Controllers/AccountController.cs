@@ -1,11 +1,14 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using WebSach.Models;
 
 namespace WebSach.Controllers
@@ -26,9 +29,17 @@ namespace WebSach.Controllers
             User find = _db.User.FirstOrDefault(p => p.User_Name == id);
             if (find == null)
                 return HttpNotFound();
+            var listfollow = _db.Follow.Where(f=>f.userName== id);
+            var listbook = new List<Books>();
+            foreach(var item in listfollow)
+            {
+                var book = _db.Books.FirstOrDefault(b => b.Book_Id == item.bookId);
+                listbook.Add(book);
+            }
             var viewModel = new UserViewModel
             {
-                user = find
+                user = find,
+                follows = listbook
             };
             return View(viewModel);
         }
@@ -153,5 +164,23 @@ namespace WebSach.Controllers
             return "~/Images/Users/" + file.FileName;
         }
 
+        public ActionResult Follow(int? page)
+        {
+            page = page ?? 1;
+            int pageSize = 24;
+            if (Session["UserName"]  == null)
+            {
+                return View("Login");
+            }
+            string name = Session["UserName"].ToString();
+
+            var list = _db.Follow.Where(L => L.userName == name).ToList();
+            var books = new List<Books>();
+            foreach (var item in list) {
+                var find = _db.Books.FirstOrDefault(L => L.Book_Id == item.bookId);
+                books.Add(find);
+            }
+            return View(books.ToPagedList(page.Value, pageSize));
+        }
     }
 }

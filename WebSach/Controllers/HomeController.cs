@@ -29,7 +29,7 @@ namespace WebSach.Controllers
             }
             else
             {
-                var Books = GetAll(search).ToPagedList(page.Value, pageSize);
+                var Books = GetAll(type).ToPagedList(page.Value, pageSize);
                 return View(Books);
             }
         }
@@ -77,6 +77,12 @@ namespace WebSach.Controllers
             int pageSize = 24;
             return View(GetAllOrderByDate().ToPagedList(page.Value, pageSize));
         }
+        public ActionResult XepHang(int? page)
+        {
+            page = page ?? 1;
+            int pageSize = 24;
+            return View(GetAllOrderByView().ToPagedList(page.Value, pageSize));
+        }
 
         public Books FindBookById(int id)
         {
@@ -87,6 +93,11 @@ namespace WebSach.Controllers
         {
             var Category = _db.Categories.ToList();
             return PartialView("_Category", Category);
+        }
+        public ActionResult TopBooks()
+        {
+            var topBooks = _db.Books.OrderByDescending(b => b.View).Take(3).ToList();
+            return PartialView("_TopBooks", topBooks);
         }
     }
 }

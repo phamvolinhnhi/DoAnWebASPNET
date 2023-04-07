@@ -1,0 +1,113 @@
+﻿
+@model WebSach.Models.ChartViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/WebAdmin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .column {
+        width: 50%;
+        float: left;
+    }
+</style>
+
+<div class="column">
+    <h2>Biểu Đồ So Sánh Lượng Đăng Ký Mới Qua Từng Tháng</h2>
+    <canvas id="userCountByMonth"></canvas>
+</div>
+
+<div class="column">
+    <h2>Biểu Đồ Tỉ Lệ Sách Của Các Thể Loại</h2>
+    <canvas id="categoryChart"></canvas>
+</div>
+
+
+
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        var months = @Html.Raw(Json.Encode(ViewBag.Months));
+        var userCounts = @Html.Raw(Json.Encode(ViewBag.UserCounts));
+        var colors = ['#17bdd1', '#f8b500', '#c70039', '#900c3f', '#581845'];
+        var colorIndex = 0;
+
+        var ctx = document.getElementById("userCountByMonth").getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: months,
+                datasets: [{
+                    label: 'User Count',
+                    data: userCounts,
+                    backgroundColor: colors[colorIndex],
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+        setInterval(function() {
+            colorIndex = (colorIndex + 1) % colors.length;
+            chart.data.datasets[0].backgroundColor = colors[colorIndex];
+            chart.update();
+        }, 1000);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        var categories = @Html.Raw(Json.Encode(ViewBag.Categories));
+        var bookCounts = @Html.Raw(Json.Encode(ViewBag.BookCounts));
+
+        var ctx = document.getElementById("categoryChart").getContext('2d');
+        var chart1 = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: categories,
+                datasets: [{
+                    data: bookCounts,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+    </script>
+}
+
+
+
+
+
+
+
+

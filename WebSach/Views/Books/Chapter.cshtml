@@ -1,48 +1,112 @@
 ﻿@model WebSach.Models.BooksViewModel
 @{
-    ViewBag.Title = "Chapter";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    var result = "";
+    Array userData = null;
+    char[] delimiterChar = { ',' };
+
+    var dataFile = Server.MapPath(Model.chapter.Content);
+
+    if (File.Exists(dataFile))
+    {
+        userData = File.ReadAllLines(dataFile);
+        if (userData == null)
+        {
+            // Empty file.
+            result = "The file is empty.";
+        }
+    }
+    else
+    {
+        // File does not exist.
+        result = "The file does not exist.";
+    }
 }
 
 <div class="div_middle">
     <div id="story-reading">
         <div id="funbar" class="clearfix">
             <div id="funbar-story" class="dropdown">
-                <button id="funbar-part-details" class="btn btn-toc dropdown-toggle" data-toggle="dropdown">
+                <button onclick="toggle_visibility('list-chapter');" id="funbar-part-details" class="btn btn-toc dropdown-toggle" data-toggle="dropdown">
                     <span class="cover">
-                        <img src="~/Images/Books/@Model.books.Avatar" alt="@Model.books.Title" />
+                        <img src="@Model.book.Avatar" alt="@Model.book.Title"></img>
                     </span>
                     <span class="info">
-                        <h2 class="title">
-                            @Model.books.Title
-                        </h2>
+                        <h5 class="title">@Model.book.Title</h5>
+                        <h6 class="author">@Model.book.Author</h6>
                     </span>
-                    <span class="fa fa-caret-down" aria-hidden="true"></span>
+                    <span class=" fa fa-caret-down" aria-hidden="true">
+                    </span>
                 </button>
-                <div class="class="dropdown-menu pull-left">
+                <div id="list-chapter" class="dropdown-menu pull-left">
                     <div class="toc-header text-center">
                         <h6>
-                            <a class="on-navigate" href="@Url.Action("Sach","Book", new { id = Model.books.Book_Id})">@Model.books.Title</a>
+                            <a class="on-navigate" href="@Url.Action("Index","Books", new { id = Model.book.Book_Id })">@Model.book.Title</a>
                         </h6>
                         <small>Bảng mục lục</small>
                     </div>
                     <ul class="table-of-contents">
-                        
+                        @foreach (var item in Model.Chapters)
+                        {
+                            <li>
+                                <a class="on-navigate" href="@Url.Action("Chapter","Books", new { bookid = Model.book.Book_Id, id = item.Chapter_Id })">
+                                    <div class="part-title">
+                                        @item.Chapter_Name
+                                    </div>
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
+            <div class="funbar-controls">
+                <div class="button-listadd">
+                    @if (Session["UserName"] != null)
+                    {
+                        <a class="btn btn-story-lists btn-sm btn-orange on-lists-add-clicked"
+                           href="@Url.Action("Follow","Books", new { bookId = Model.book.Book_Id})">
+                            <span class="fa fa-plus" aria-hidden="true"></span>
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <header>
+                <p class="chapter_title">@Model.book.Title</p>
+            </header>
+            @result
+                @if (result == "")
+                {
+                    <ol>
+                        @foreach (string dataLine in userData)
+                        {
+                            <li>
+                                <ul>
+                                    @foreach (string dataItem in dataLine.Split(delimiterChar))
+                                    {
+                                        <li>@dataItem</li>
+                                    }
+                                </ul>
+                            </li>
+                        }
+                    </ol>
+                }
+
         </div>
     </div>
 </div>
-<script>
-    var links = document.querySelectorAll('.dropdown-menu ul li a');
-    links.forEach(function (element) {
-        element.addEventListener('click', function (e) {
-            // PreventDefault to prevent redirect
-            e.preventDefault();
-            links.forEach(function (element) {
-                element.classList.remove('active');
-            });
-            this.classList.add('active');
-        });
-    });
+
+<script type="text/javascript">
+    function toggle_visibility(id) {
+        var box = document.getElementById(id);
+        if (box.style.display == 'block') {
+            box.style.display = 'none';
+        }
+        else {
+            box.style.display = 'block';
+        }
+    }
 </script>

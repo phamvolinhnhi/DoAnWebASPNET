@@ -73,6 +73,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -133,24 +134,28 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\WebAdmin\Controllers\AdminBooksController.cs" />
+    <Compile Include="Areas\WebAdmin\Controllers\AdminCategoriesController.cs" />
+    <Compile Include="Areas\WebAdmin\Controllers\AdminChaptersController.cs" />
+    <Compile Include="Areas\WebAdmin\Controllers\AdminUsersController.cs" />
+    <Compile Include="Areas\WebAdmin\Controllers\HomeAdminController.cs" />
+    <Compile Include="Areas\WebAdmin\WebAdminAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202304041200281_create.cs" />
-    <Compile Include="Migrations\202304041200281_create.designer.cs">
-      <DependentUpon>202304041200281_create.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Books.cs" />
     <Compile Include="Models\BooksViewModel.cs" />
     <Compile Include="Models\Categories.cs" />
     <Compile Include="Models\Chapter.cs" />
-    <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\ChartViewModel.cs" />
+    <Compile Include="Models\Follow.cs" />
+    <Compile Include="Models\ReadHistory.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserViewModel.cs" />
+    <Compile Include="Models\User_Login.cs" />
     <Compile Include="Models\WebBookDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -172,10 +177,11 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\PagedList.css" />
-    <Content Include="CSS\media.css" />
-    <Content Include="CSS\media2.css" />
+    <Content Include="CSS\admin.css" />
+    <Content Include="CSS\admin2.css" />
+    <Content Include="CSS\me.css" />
     <Content Include="CSS\StyleSheet1.css" />
-    <Content Include="CSS\StyleSheet4.css" />
+    <Content Include="CSS\user.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -188,6 +194,8 @@
     <Content Include="Images\Banner\R.jpg" />
     <Content Include="Images\Banner\reading-book-web-banner-design-student-reading-book-on-stack-of-book-to-get-inspiration-online-education-digital-classroom-e-learning-concept-header-or-footer-banner-free-vector.jpg" />
     <Content Include="Images\Banner\SMP-books-banner.jpg" />
+    <Content Include="Images\Contacts\fb.png" />
+    <Content Include="Images\Contacts\ytb.png" />
     <Content Include="Images\shortcuticon.png" />
     <Content Include="Images\Users\default-avatar.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -196,6 +204,39 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\WebAdmin\Views\web.config" />
+    <Content Include="Areas\WebAdmin\Views\AdminBooks\Create.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminBooks\Delete.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminBooks\Details.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminBooks\Edit.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminBooks\Index.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminCategories\Create.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminCategories\Delete.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminCategories\Details.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminCategories\Edit.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminCategories\Index.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminChapters\Create.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminChapters\Delete.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminChapters\Details.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminChapters\Edit.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminChapters\Index.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminUsers\Create.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminUsers\Delete.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminUsers\Details.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminUsers\Edit.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminUsers\Index.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\AdminUsers\Login.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\HomeAdmin\Category.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\HomeAdmin\Index.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\HomeAdmin\SachMoi.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\HomeAdmin\TheLoai.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\HomeAdmin\TopBooks.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\HomeAdmin\XepHang.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\Shared\Error.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\Shared\_Category.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\Shared\_TopBooks.cshtml" />
+    <Content Include="Areas\WebAdmin\Views\_ViewStart.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -207,6 +248,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\myscripts\JavaScript.js" />
     <Content Include="Scripts\myscripts\myjs.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -219,19 +261,23 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Account\Follow.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Books\Index.cshtml" />
-    <Content Include="Views\Books\Sach.cshtml" />
     <Content Include="Views\Books\Chapter.cshtml" />
-    <Content Include="Views\Home\Books.cshtml" />
-    <Content Include="Views\Account\Index.cshtml" />
-    <Content Include="Views\Account\Edit.cshtml" />
-
+    <Content Include="Views\Books\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\SachMoi.cshtml" />
+    <Content Include="Views\Home\XepHang.cshtml" />
+    <Content Include="Views\Shared\_Category.cshtml" />
+    <Content Include="Views\Shared\_TopBooks.cshtml" />
+    <Content Include="Views\Account\History.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\WebAdmin\Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
@@ -261,9 +307,7 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202304041200281_create.resx">
-      <DependentUpon>202304041200281_create.cs</DependentUpon>
-    </EmbeddedResource>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -283,7 +327,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>58581</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44354/</IISUrl>
+          <IISUrl>https://localhost:44355/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -1,0 +1,12 @@
+﻿
+@model List<WebSach.Models.Categories>
+
+@if (Model != null && Model.Count > 0)
+{
+    <ul>
+        @foreach (var category in Model)
+        {
+            <a href="@Url.Action("Index", "Home", new { type = category.Category_Id })">@category.Category_Name</a>
+        }
+    </ul>
+}

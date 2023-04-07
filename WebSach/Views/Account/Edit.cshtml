@@ -1,4 +1,4 @@
-﻿@model WebSach.Models.UserViewModel
+﻿@model WebSach.Models.User
 
 @{
     ViewBag.Title = "Edit";
@@ -11,52 +11,50 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>User</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.user.User_Name)
+        @Html.HiddenFor(model => model.User_Name)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.user.Full_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Full_Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.user.Full_Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.user.Full_Name, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Full_Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Full_Name, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.user.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.user.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.user.Email, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
         </div>
 
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Avatar, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Avatar, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Avatar, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
         <div class="form-group">
             <div class="col-md-10">
-                @Html.EditorFor(model => model.user.Avatar, new
+                @Html.EditorFor(model => model.Avatar, new
                 {
                     htmlAttributes = new
                     {
-                        @class = "form-control",
-                        @id = "AvatarUpload"
+                        @id = "hinh",
+                        @class =
+               "form-control"
                     }
                 })
-                @Html.ValidationMessageFor(model => model.user.Avatar, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Avatar, "", new { @class = "text-danger" })
                 <input type="file" name="fileUpload" id="fileUpload" accept="image/*"
                        style="display:none;" />
                 <input type="button" id="btnUpload" value="Chọn" class="btn btn-success" />
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.user.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.user.Password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.user.Password, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
@@ -64,10 +62,6 @@
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section scripts
  {
@@ -91,8 +85,8 @@
                         processData: false,
                         data: formData,
                         success: function (urlImage) {
-                            $('#AvatarUpload').attr('src', urlImage);
-                            $('#Avatar').val(urlImage);
+                            $('#pictureUpload').attr('src', urlImage);
+                            $('#hinh').val(urlImage);
                         },
                         error: function (err) {
                             alert('Error ', err.statusText);

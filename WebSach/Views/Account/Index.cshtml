@@ -20,7 +20,7 @@
                         <div class="detail">@Html.DisplayFor(model => model.user.Email)</div>
                     </div>
                     <div class="group">
-                        <a class="btn btn-warning" href="@Url.Action("Edit","Account", new { id = Model.user.User_Name })">Chỉnh sửa</a>
+                        <a class="btn btn-warning" href="@Url.Action("Edit","Account", new { name = Model.user.User_Name })">Chỉnh sửa</a>
                     </div>
                 </div>
 
@@ -38,8 +38,75 @@
             <div class="relative">
                 <h2 class="posttitle">Truyện theo dõi</h2>
             </div>
+            <div class="list_grid_out">
+                <ul class="list_grid grid" id="list_new">
+                    @foreach (var item in Model.follows)
+                    {
+                        <li>
+                            <div class="col-waka-card">
+                                <div class="card-book">
+                                    <a class="card-book-img" href="@Url.Action("Index","Books", new { id = item.Book_Id})">
+                                        <img src="@item.Avatar" alt="@item.Title" />
+                                    </a>
+                                    <div class="card-book-info">
+                                        <a class="card-book-info-title" href="@Url.Action("Index","Books", new { id = item.Book_Id})">
+                                            <h3>@item.Title</h3>
+                                        </a>
+                                        <h3 class="card-book-info-author">
+                                            @item.Author
+                                        </h3>
+                                        <div class="card-book-info-description">
+                                            <p>@item.Description</p>
+                                        </div>
+                                    </div>
+                                    <div class="break-line"></div>
+                                    <div class="card-book-view">
+                                        <small>@item.View lượt xem</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </li>
+                    }
+                </ul>
+            </div>
+
+        </div>    
+        <div class="col-xs-12 col-md-6">
+            <div class="relative">
+                <h2 class="posttitle">Lịch sử</h2>
+            </div>
+            <div class="list_grid_out">
+                <ul class="list_grid grid" id="list_new">
+                    @foreach (var item in Model.histories)
+                    {
+                        <li>
+                            <div class="col-waka-card">
+                                <div class="card-book">
+                                    <a class="card-book-img" href="@Url.Action("Index","Books", new { id = item.Book_Id})">
+                                        <img src="@item.Avatar" alt="@item.Title" />
+                                    </a>
+                                    <div class="card-book-info">
+                                        <a class="card-book-info-title" href="@Url.Action("Index","Books", new { id = item.Book_Id})">
+                                            <h3>@item.Title</h3>
+                                        </a>
+                                        <h3 class="card-book-info-author">
+                                            @item.Author
+                                        </h3>
+                                        <div class="card-book-info-description">
+                                            <p>@item.Description</p>
+                                        </div>
+                                    </div>
+                                    <div class="break-line"></div>
+                                    <div class="card-book-view">
+                                        <small>@item.View lượt xem</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </li>
+                    }
+                </ul>
+            </div>
         </div>
-
-
     </div>
-</div>

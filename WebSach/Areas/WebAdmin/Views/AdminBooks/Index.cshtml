@@ -1,0 +1,112 @@
+﻿@model IEnumerable<WebSach.Models.Books>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/WebAdmin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<style>
+    table, th, td {
+        border: 1px solid #c0d399;
+        width: 80%;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+        table tr:nth-child(odd) {
+            background-color: #eee;
+        }
+
+        table tr:nth-child(even) {
+            background-color: white;
+        }
+
+        table tr:nth-child(1) {
+            background-color: #c0d399;
+        }
+
+    .center-parent {
+        text-align: center;
+    }
+</style>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Categories.Category_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.Full_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Author)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Create_at)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Update_at)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Avatar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.View)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Content)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categories.Category_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Full_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Create_at)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Update_at)
+            </td>
+            <td>
+                @if (!String.IsNullOrEmpty(item.Avatar))
+                {
+                    <img src="@item.Avatar" alt="hinh thumnail" width="150" height="150">
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.View)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Book_Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Book_Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Book_Id })
+            </td>
+        </tr>
+    }
+
+</table>

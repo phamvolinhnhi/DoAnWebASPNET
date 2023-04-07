@@ -1,4 +1,4 @@
-﻿namespace WebSach.Models
+namespace WebSach.Models
 {
     using System;
     using System.Collections.Generic;
@@ -11,8 +11,7 @@
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Books()
         {
-            Chapter = new HashSet<Chapter>();
-            Comment = new HashSet<Comment>();
+            ReadHistory = new HashSet<ReadHistory>();
         }
 
         [Key]
@@ -37,20 +36,18 @@
         public int? View { get; set; }
 
         public string Content { get; set; }
+
         public string Description { get; set; }
 
-        [Required]
         [StringLength(50)]
         public string User_Name { get; set; }
 
         public virtual Categories Categories { get; set; }
 
         public virtual User User { get; set; }
+        public bool isFollowing = false;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Chapter> Chapter { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Comment> Comment { get; set; }
+        public virtual ICollection<ReadHistory> ReadHistory { get; set; }
     }
 }

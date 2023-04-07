@@ -16,25 +16,33 @@ namespace WebSach.Controllers
             _db = new WebBookDb();
         }
 
-        // GET: Books
         public ActionResult Index(int? id)
         {
             if (id == null)
             {
-                return HttpNotFound();
+                return View("Index", "Home");
             }
-            Books books = FindBookById(id.Value);
+            Books books = _db.Books.Where(c => c.Book_Id == id).FirstOrDefault();
             if (books == null)
             {
-                return HttpNotFound();
+                return View("Index", "Home");
             }
-            var booksviewmodel = new BooksViewModel
+            BooksViewModel viewModel = new BooksViewModel();
+            if (Session["UserName"] != null)
             {
-                books = FindBookById(id.Value),
-                Chapters = _db.Chapter.Where(c => c.Book_Id == id.Value).ToList(),
-                Comments = _db.Comment.Where(c => c.Book_Id == id.Value).ToList(),
-            };
-            return View(booksviewmodel);
+                string name = Session["UserName"].ToString();
+                var find = _db.Follow.FirstOrDefault(f => f.bookId == id && f.userName == name);
+                if (find == null)
+                    books.isFollowing = false;
+                else books.isFollowing = true;
+                var findi = _db.ReadHistory.FirstOrDefault(c=>c.UserName == name && c.BookId == id);
+                if (findi != null)
+                    viewModel.chapterid = findi.ChapId;
+            }
+            viewModel.book = books;
+            viewModel.Chapters = _db.Chapter.Where(c => c.Book_Id == id).ToList();
+            return View(viewModel);
+
         }
 
         public List<Books> GetAll() => _db.Books.ToList();
@@ -46,26 +54,77 @@ namespace WebSach.Controllers
 
         public Books FindBookById(int id)
         {
-            return _db.Books.FirstOrDefault(p => p.Book_Id == id);
+            return _db.Books.SingleOrDefault(c => c.Book_Id == id);
         }
+
         public ActionResult Chapter(int? bookid, int? id)
         {
             if (id == null || bookid == null)
             {
-                return HttpNotFound();
+                return View("Index", "Home");
             }
-            Chapter chapter = _db.Chapter.Where(c => c.Chapter_Id == id.Value && c.Book_Id == bookid).FirstOrDefault();
 
+            Chapter chapter = _db.Chapter.Where(c => c.Chapter_Id == id.Value && c.Book_Id == bookid).FirstOrDefault();
             if (chapter == null)
             {
                 return HttpNotFound();
             }
-            return View(chapter);
+            var bookf = _db.Books.FirstOrDefault(b => b.Book_Id == bookid);
+            bookf.View += 1;
+            var viewModel = new BooksViewModel
+            {
+                book = bookf,
+                Chapters = _db.Chapter.Where(c => c.Book_Id == bookid).ToList(),
+                chapter = chapter
+            };
+            if (Session["UserName"] != null)
+            {
+                string name = Session["UserName"].ToString();
+                var find = _db.ReadHistory.FirstOrDefault(f => f.BookId == bookid && f.UserName == name);
+                if (find == null)
+                {
+                    find = new ReadHistory
+                    {
+                        BookId = bookid.Value,
+                        UserName = Session["UserName"].ToString(),
+                        Time = DateTime.Now,
+                        ChapId = id.Value,
+                    };
+                    _db.ReadHistory.Add(find);
+                }
+                else
+                {
+                    find.Time = DateTime.Now;
+                    find.ChapId = id.Value;
+                }
+                _db.SaveChanges();
+            }
+            return View(viewModel);
         }
 
-        public void Comment(BooksViewModel viewModel)
+        public void Follow(int? bookId)
         {
-
+            var book = new Books();
+            if (Session["UserName"] != null)
+            {
+                string name = Session["UserName"].ToString();
+                var find = _db.Follow.FirstOrDefault(f => f.bookId == bookId && f.userName == name);
+                if (find == null)
+                {
+                    find = new Follow
+                    {
+                        userName = name,
+                        bookId = bookId.Value
+                    };
+                    _db.Follow.Add(find);
+                }
+                else
+                {
+                    _db.Follow.Remove(find);
+                }
+                _db.SaveChanges();
+            }
         }
+
     }
 }

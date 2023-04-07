@@ -50,7 +50,6 @@
         /*responsive code end*/
     };
 </script>
-
 <!-------Banner Script/Style---------->
 <div class="div_middle">
     <form id="form1">
@@ -84,31 +83,53 @@
 
         <script type="text/javascript">jssor_1_slider_init();</script>
     </form>
-</div>
 
-<div class="div_middle">
     <h2>@ViewBag.Keyword</h2>
     <div class="list_grid_out">
         <ul class="list_grid grid" id="list_new">
             @foreach (var item in Model)
             {
+                @*<li>
+                <div class="book_avatar">
+                    <a href="@Url.Action("Index","Books", new { id = item.Book_Id})">
+                        <img class="center" src="@item.Avatar" alt="@item.Title" />
+                    </a>
+                    <div class="top-notice">
+                        <span class="time-ago"> @item.Update_at</span>
+                    </div>
+                </div>
+                <div class="book_info">
+                    <div class="book_name qtip">
+                        <h3>
+                            <a title="@item.Title" href="/@item.Book_Id">@item.Title</a>
+                        </h3>
+                    </div>
+                </div>
+            </li>*@
                 <li>
-                    <div class="book_avatar">
-                        <a href="@Url.Action("","Books", new { id = item.Book_Id})">
-                            <img class="center" src="@item.Avatar" alt="@item.Title" />
-
-                        </a>
-                        <div class="top-notice">
-                            <span class="time-ago">@item.Update_at</span>
+                    <div class="col-waka-card">
+                        <div class="card-book">
+                            <a class="card-book-img" href="@Url.Action("Index","Books", new { id = item.Book_Id})">
+                                <img src="@item.Avatar" alt="@item.Title" />
+                            </a>
+                            <div class="card-book-info">
+                                <a class="card-book-info-title" href="@Url.Action("Index","Books", new { id = item.Book_Id})">
+                                    <h3>@item.Title</h3>
+                                </a>
+                                <h3 class="card-book-info-author">
+                                    @item.Author
+                                </h3>
+                                <div class="card-book-info-description">
+                                    <p>@item.Description</p>
+                                </div>
+                            </div>
+                            <div class="break-line"></div>
+                            <div class="card-book-view">
+                                <small>@item.View lượt xem</small>
+                            </div>
                         </div>
                     </div>
-                    <div class="book_info">
-                        <div class="book_name qtip">
-                            <h3>
-                                <a title="@item.Title" href="/@item.Book_Id">@item.Title</a>
-                            </h3>
-                        </div>
-                    </div>
+                  
                 </li>
             }
         </ul>
@@ -117,7 +138,7 @@
     <div class="has-text-centered">
         <div class="MenuTrang">
             @Html.PagedListPager(Model, page => Url.Action("Index",
-                                new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }), new PagedListRenderOptions
+                                new { page, search = ViewBag.Keyword }), new PagedListRenderOptions
                                  {
                                     DisplayLinkToFirstPage = PagedListDisplayMode.Never,
                                     DisplayLinkToLastPage = PagedListDisplayMode.Never,
@@ -127,9 +148,11 @@
                                 })
         </div>
     </div>
-
 </div>
+
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
 <script>
     $(document).ready(function () {
         var maxLength = 100;

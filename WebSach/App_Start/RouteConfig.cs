@@ -18,6 +18,12 @@ namespace WebSach
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+            name: "DefaultAdmin",
+            url: "{controller}/{action}/{id}",
+            defaults: new { controller = "HomeAdmin", action = "Index", id = UrlParameter.Optional }
+            ).DataTokens.Add("area", "WebAdmin");
         }
     }
 }
